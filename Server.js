@@ -11,17 +11,15 @@ app.use(express.json()); // important
 
 app.use("/api/v1/products", router);
 
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
+
 // global error handler (nice to have)
 app.use((err, req, res, next) => {
   console.error("Global error:", err);
   res.status(err.status || 500).send({ error: err.message || "Internal Server Error" });
 });
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -32,3 +30,4 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
+module.exports = app;
