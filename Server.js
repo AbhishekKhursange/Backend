@@ -11,8 +11,8 @@ app.use(express.json()); // important
 
 app.use("/api/v1/products", router);
 
-app.get("/", (req, res) => {
-  res.send("Backend is running");
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });
 
 // global error handler (nice to have)
@@ -30,4 +30,3 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
-module.exports = app;
